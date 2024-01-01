@@ -7,8 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "professor")
-@Entity(name = "PRofessor")
+@Table(name = "professores")
+@Entity(name = "Professor")
 @EqualsAndHashCode(of = "id")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,7 +25,7 @@ public class Professor {
     private String altura;
     private String email;
 
-    Professor(DadosCadastroProfessor dados){
+    public Professor(DadosCadastroProfessor dados){
         this.nome = dados.nome();
         this.idade = dados.idade();
         this.altura = dados.altura();
