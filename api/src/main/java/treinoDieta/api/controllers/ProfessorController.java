@@ -47,5 +47,14 @@ public class ProfessorController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity atualizar(@PathVariable Long id, @RequestBody DadosAtualizacaoProfessor dados){
+        var professor = professorRepository.getReferenceByIdAndAtivoTrue(id);
+        professor.atualizar(dados);
+
+        return ResponseEntity.ok().body(new DadosDetalhamentoProfessor(professor));
+    }
+
 
 }
