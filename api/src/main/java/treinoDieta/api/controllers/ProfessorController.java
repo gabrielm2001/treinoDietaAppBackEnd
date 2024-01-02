@@ -28,7 +28,7 @@ public class ProfessorController {
 
     @GetMapping
     public ResponseEntity<Page<DadosListagemProfessor>> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao){
-        var page = professorRepository.findAll(paginacao).map(DadosListagemProfessor::new);
+        var page = professorRepository.findAllByAtivoTrue(paginacao).map(DadosListagemProfessor::new);
         return ResponseEntity.ok().body(page);
     }
 
@@ -36,6 +36,15 @@ public class ProfessorController {
     public ResponseEntity listar1(@PathVariable Long id){
         var professor = professorRepository.getReferenceById(id);
         return ResponseEntity.ok(new DadosDetalhamentoProfessor(professor));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deletar(@PathVariable Long id){
+        var professor = professorRepository.getReferenceById(id);
+        professor.deletar();
+
+        return ResponseEntity.noContent().build();
     }
 
 
