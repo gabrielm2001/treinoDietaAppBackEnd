@@ -1,11 +1,8 @@
-create table professores(
-
-    id bigint not null auto_increment,
-    nome varchar(100) not null,
-    idade varChar(20) not null,
-    altura varChar(20) not null,
-    email varchar(100) not null unique,
-
-    primary key(id)
-
+CREATE TABLE professores(
+   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+   nome VARCHAR(100) NOT NULL,
+   idade VARCHAR(20) NOT NULL,
+   altura VARCHAR(20) NOT NULL,
+   email VARCHAR(100) NOT NULL UNIQUE,
+   PRIMARY KEY(id)
 );
