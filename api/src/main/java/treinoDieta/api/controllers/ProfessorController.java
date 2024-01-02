@@ -2,23 +2,18 @@ package treinoDieta.api.controllers;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
-import treinoDieta.api.professor.DadosCadastroProfessor;
-import treinoDieta.api.professor.DadosListagemProfessor;
-import treinoDieta.api.professor.Professor;
-import treinoDieta.api.professor.ProfessorRepository;
+import treinoDieta.api.professor.*;
 
 @RestController
 @RequestMapping("/professor")
-public class MedicoController {
+public class ProfessorController {
     @Autowired
     private ProfessorRepository professorRepository;
 
@@ -36,5 +31,12 @@ public class MedicoController {
         var page = professorRepository.findAll(paginacao).map(DadosListagemProfessor::new);
         return ResponseEntity.ok().body(page);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity listar1(@PathVariable Long id){
+        var professor = professorRepository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoProfessor(professor));
+    }
+
 
 }
