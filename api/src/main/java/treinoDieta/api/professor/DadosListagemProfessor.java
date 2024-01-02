@@ -7,9 +7,11 @@ import jakarta.validation.constraints.Pattern;
 public record DadosListagemProfessor(@NotBlank String nome,
                                      @NotBlank @Pattern(regexp = "\\d{2}") String idade,
                                      @NotBlank String altura,
-                                     @NotBlank @Email String email) {
+                                     @NotBlank @Email String email,
+                                        @NotBlank Boolean ativo
+) {
 
     public DadosListagemProfessor(Professor professor){
-        this(professor.getNome(), professor.getIdade(),professor.getAltura(), professor.getEmail());
+        this(professor.getNome(), professor.getIdade(),professor.getAltura(), professor.getEmail(), professor.getAtivo());
     }
 }
