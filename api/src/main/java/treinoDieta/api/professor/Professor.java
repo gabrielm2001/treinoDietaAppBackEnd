@@ -25,10 +25,13 @@ public class Professor {
     private String altura;
     private String email;
 
+    private Boolean ativo;
+
     public Professor(DadosCadastroProfessor dados){
         this.nome = dados.nome();
         this.idade = dados.idade();
         this.altura = dados.altura();
         this.email = dados.email();
+        this.ativo = false;
     }
 }
