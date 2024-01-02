@@ -32,6 +32,10 @@ public class Professor {
         this.idade = dados.idade();
         this.altura = dados.altura();
         this.email = dados.email();
-        this.ativo = false;
+        this.ativo = true;
+    }
+
+    public void deletar() {
+        this.ativo = Boolean.FALSE;
     }
 }
