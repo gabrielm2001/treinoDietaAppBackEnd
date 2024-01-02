@@ -38,4 +38,16 @@ public class Professor {
     public void deletar() {
         this.ativo = Boolean.FALSE;
     }
+
+    public void atualizar(DadosAtualizacaoProfessor dados) {
+        if(dados.nome() != null){
+            this.nome = dados.nome();
+        }
+        if(dados.idade() != null){
+            this.idade = dados.idade();
+        }
+        if(dados.altura() != null){
+            this.altura = dados.altura();
+        }
+    }
 }
