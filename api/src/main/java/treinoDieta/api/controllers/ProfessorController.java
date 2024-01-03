@@ -49,7 +49,7 @@ public class ProfessorController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity atualizar(@PathVariable Long id, @RequestBody DadosAtualizacaoProfessor dados){
+    public ResponseEntity atualizar(@PathVariable Long id, @RequestBody @Valid DadosAtualizacaoProfessor dados){
         var professor = professorRepository.getReferenceByIdAndAtivoTrue(id);
         professor.atualizar(dados);
 
