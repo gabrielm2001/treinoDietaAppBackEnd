@@ -1,7 +1,7 @@
 package treinoDieta.api.aluno;
 
 public enum Genero {
-    MASCULO,
+    MASCULINO,
     FEMININO,
     F,
     M,
