@@ -18,7 +18,7 @@ public class Aluno {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "professorId")
+    @JoinColumn(name = "professor_id")
     private Professor professor;
 
     private String nome;
@@ -38,31 +38,31 @@ public class Aluno {
     private String tbm;
     private Boolean ativo;
 
-    public Aluno(DadosCadastroAluno dados){
+    public Aluno(DadosCadastroAluno dados, Professor professor){
         this.nome = dados.nome();
         this.idade = dados.idade();
         this.altura = dados.altura();
         this.email = dados.email();
-
         this.peso = dados.peso();
         this.projeto = dados.projeto();
         this.objetivo = dados.objetivo();
-
+        System.out.println(dados.genero());
         this.genero = dados.genero();
         this.ativo = true;
 
         this.agua = String.valueOf(Double.parseDouble(dados.peso()) * 35);
         this.tbm = calculaTbm(dados.genero(), dados.peso(), dados.idade(), dados.altura());
-        this.ativo = true;
+        this.professor = professor;
     }
 
     private String calculaTbm(Genero genero, String peso, String idade, String altura) {
-        if (genero.equals("M") || genero.equals("MASCULINO") || genero.equals("NENHUM")) {
+        if (genero == Genero.MASCULINO || genero == Genero.NENHUM) {
             return String.valueOf(88.362 + (13.397 * Double.parseDouble(peso)) + (4.799 * Double.parseDouble(altura)) - (5.677 * Double.parseDouble(idade)));
-        } else if (genero.equals("F") || genero.equals("MASCULINO")) {
+        } else if (genero == Genero.FEMININO) {
             return String.valueOf(447.593 + (9.247 * Double.parseDouble(peso)) + (3.098 * Double.parseDouble(altura)) - (4.330 * Double.parseDouble(idade)));
         } else {
             throw new IllegalArgumentException("Invalid gender");
         }
     }
+
 }
