@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosCadastroAluno(
-        @NotBlank Long professorId,
         @NotBlank @Email String email,
         @NotBlank String idade,
         @NotBlank String nome,
@@ -14,8 +13,5 @@ public record DadosCadastroAluno(
         @NotBlank String projeto,
         @NotNull Objetivo objetivo,
         @NotNull Genero genero
-
-
-
 ) {
 }
