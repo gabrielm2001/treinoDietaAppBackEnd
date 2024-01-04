@@ -9,11 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import treinoDieta.api.aluno.Aluno;
-import treinoDieta.api.aluno.AlunoRepository;
-import treinoDieta.api.aluno.DadosCadastroAluno;
-import treinoDieta.api.aluno.DadosDetalhamentoAluno;
-import treinoDieta.api.professor.DadosListagemProfessor;
+import treinoDieta.api.aluno.*;
 import treinoDieta.api.professor.ProfessorRepository;
 
 @RestController
@@ -48,6 +44,14 @@ public class AlunoController {
     @GetMapping("/{id}")
     public ResponseEntity listar(@PathVariable Long id){
         var aluno = alunoRepository.getReferenceById(id);
+        return ResponseEntity.status(200).body(new DadosDetalhamentoAluno(aluno));
+    }
+
+    @PutMapping("{id}")
+    @Transactional
+    public ResponseEntity editar(@RequestBody DadosAtualizacaoAluno dados , @PathVariable Long id){
+        var aluno = alunoRepository.getReferenceById(id);
+        aluno.atualizar(dados);
         return ResponseEntity.status(200).body(new DadosDetalhamentoAluno(aluno));
     }
 }
