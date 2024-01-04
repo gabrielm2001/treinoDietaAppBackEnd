@@ -82,4 +82,8 @@ public class Aluno {
             this.projeto = dados.projeto();
         }
     }
+
+    public void deletar() {
+        this.ativo = false;
+    }
 }
