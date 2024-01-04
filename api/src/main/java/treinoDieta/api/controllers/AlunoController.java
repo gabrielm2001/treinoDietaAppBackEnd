@@ -54,4 +54,14 @@ public class AlunoController {
         aluno.atualizar(dados);
         return ResponseEntity.status(200).body(new DadosDetalhamentoAluno(aluno));
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deletar(@PathVariable Long id){
+        var aluno = alunoRepository.getReferenceById(id);
+        aluno.deletar();
+
+        return ResponseEntity.status(200).body(new DadosDetalhamentoAluno(aluno));
+    }
+
 }
