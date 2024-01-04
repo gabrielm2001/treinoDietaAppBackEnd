@@ -65,4 +65,21 @@ public class Aluno {
         }
     }
 
+    public void atualizar(DadosAtualizacaoAluno dados) {
+        if (dados.altura() != null){
+            this.altura = dados.altura();
+        }else if (dados.peso() != null){
+            this.peso = dados.peso();
+        }else if (dados.idade() != null){
+            this.idade = dados.idade();
+        }else if (dados.genero() != null){
+            this.genero = dados.genero();
+        }else if (dados.nome() != null){
+            this.nome = dados.nome();
+        }else if (dados.objetivo() != null){
+            this.objetivo = dados.objetivo();
+        }else if (dados.projeto() != null){
+            this.projeto = dados.projeto();
+        }
+    }
 }
