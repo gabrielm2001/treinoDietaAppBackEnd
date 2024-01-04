@@ -1,10 +1,10 @@
-package treinoDieta.api.aluno;
+package treinoDieta.api.physicalEntities.aluno;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import treinoDieta.api.professor.Professor;
+import treinoDieta.api.physicalEntities.professor.Professor;
 
 @Table(name ="alunos")
 @Entity(name = "Aluno")
