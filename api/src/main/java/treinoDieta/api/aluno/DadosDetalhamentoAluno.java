@@ -6,6 +6,7 @@ import treinoDieta.api.aluno.Aluno;
 import treinoDieta.api.aluno.Objetivo;
 
 public record DadosDetalhamentoAluno(
+        @NotBlank String nome,
         @NotBlank String email,
         @NotBlank String idade,
         @NotBlank String altura,
@@ -17,6 +18,6 @@ public record DadosDetalhamentoAluno(
 
 ) {
     public DadosDetalhamentoAluno(Aluno aluno) {
-        this(aluno.getEmail(), aluno.getIdade(), aluno.getAltura(), aluno.getPeso(), aluno.getProjeto(), aluno.getObjetivo(), aluno.getAgua(), aluno.getTbm());
+        this(aluno.getNome(),aluno.getEmail(), aluno.getIdade(), aluno.getAltura(), aluno.getPeso(), aluno.getProjeto(), aluno.getObjetivo(), aluno.getAgua(), aluno.getTbm());
     }
 }
