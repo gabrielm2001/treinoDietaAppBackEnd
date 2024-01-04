@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import treinoDieta.api.aluno.AlunoRepository;
+import treinoDieta.api.aluno.DadosDetalhamentoAluno;
 import treinoDieta.api.professor.*;
 
 @RestController
@@ -16,6 +18,9 @@ import treinoDieta.api.professor.*;
 public class ProfessorController {
     @Autowired
     private ProfessorRepository professorRepository;
+
+    @Autowired
+    private AlunoRepository alunoRepository;
 
     @PostMapping
     @Transactional
@@ -54,6 +59,12 @@ public class ProfessorController {
         professor.atualizar(dados);
 
         return ResponseEntity.ok().body(new DadosDetalhamentoProfessor(professor));
+    }
+
+    @GetMapping("alunos/{id}")
+    public ResponseEntity<Page<DadosDetalhamentoAluno>> alunosDoProfessor(@PageableDefault(size=10, sort = {"nome"}) Pageable paginacao, @PathVariable Long id){
+        var alunosPage =  alunoRepository.findAllByProfessorIdAndAtivoTrue(paginacao, id);
+        return ResponseEntity.status(200).body(alunosPage);
     }
 
 
