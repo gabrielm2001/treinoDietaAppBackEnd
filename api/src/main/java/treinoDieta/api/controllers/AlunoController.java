@@ -44,4 +44,10 @@ public class AlunoController {
 
         return ResponseEntity.ok().body(page);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity listar(@PathVariable Long id){
+        var aluno = alunoRepository.getReferenceById(id);
+        return ResponseEntity.status(200).body(new DadosDetalhamentoAluno(aluno));
+    }
 }
