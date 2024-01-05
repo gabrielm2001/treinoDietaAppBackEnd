@@ -19,12 +19,14 @@ public class Ficha {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "alunos")
+    @JoinColumn(name = "aluno_id")
     private Aluno aluno;
 
-    private String nomeFicha;
+    private String nome_ficha;
 
-    public Ficha(DadosCadastroFicha dados){
-        this.nomeFicha = dados.nomeFicha();
+
+    public Ficha(DadosCadastroFicha dados, Aluno aluno){
+        this.nome_ficha = dados.nome_ficha();
+        this.aluno = aluno;
     }
 }

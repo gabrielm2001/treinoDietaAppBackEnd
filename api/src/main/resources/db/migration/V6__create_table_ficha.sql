@@ -1,6 +1,6 @@
 CREATE TABLE fichas(
    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-   nomeFicha VARCHAR(100) NOT NULL,
+   nome_ficha VARCHAR(100) NOT NULL,
 
     aluno_id bigint unsigned,
 
