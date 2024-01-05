@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import treinoDieta.api.aluno.AlunoRepository;
-import treinoDieta.api.aluno.DadosDetalhamentoAluno;
-import treinoDieta.api.professor.*;
+import treinoDieta.api.physicalEntities.aluno.AlunoRepository;
+import treinoDieta.api.physicalEntities.aluno.DadosDetalhamentoAluno;
+import treinoDieta.api.physicalEntities.professor.*;
 
 @RestController
 @RequestMapping("/professor")

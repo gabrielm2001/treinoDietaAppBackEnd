@@ -1,4 +1,4 @@
-package treinoDieta.api.professor;
+package treinoDieta.api.physicalEntities.professor;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

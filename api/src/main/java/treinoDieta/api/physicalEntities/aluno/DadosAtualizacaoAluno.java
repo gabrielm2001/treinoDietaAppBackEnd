@@ -1,4 +1,4 @@
-package treinoDieta.api.aluno;
+package treinoDieta.api.physicalEntities.aluno;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

@@ -1,9 +1,7 @@
-package treinoDieta.api.aluno;
+package treinoDieta.api.physicalEntities.aluno;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import treinoDieta.api.aluno.Aluno;
-import treinoDieta.api.aluno.Objetivo;
 
 public record DadosDetalhamentoAluno(
         @NotBlank String nome,

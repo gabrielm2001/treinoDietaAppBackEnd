@@ -1,4 +1,4 @@
-package treinoDieta.api.aluno;
+package treinoDieta.api.physicalEntities.aluno;
 
 public enum Genero {
     MASCULINO,

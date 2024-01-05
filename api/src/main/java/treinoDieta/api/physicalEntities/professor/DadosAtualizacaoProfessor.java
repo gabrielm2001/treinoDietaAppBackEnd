@@ -1,6 +1,5 @@
-package treinoDieta.api.professor;
+package treinoDieta.api.physicalEntities.professor;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
