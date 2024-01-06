@@ -58,4 +58,13 @@ public class FichaController {
         return ResponseEntity.ok().body(new DadosDetalhamentoFicha(ficha));
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deletar(@PathVariable Long id){
+        var ficha = fichaRepository.getReferenceById(id);
+        ficha.deletar();
+
+        return ResponseEntity.noContent().build();
+    }
+
 }
