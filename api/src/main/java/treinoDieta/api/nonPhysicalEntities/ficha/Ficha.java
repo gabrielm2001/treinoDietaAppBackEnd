@@ -29,4 +29,10 @@ public class Ficha {
         this.nomeFicha = dados.nomeFicha();
         this.aluno = aluno;
     }
+
+    public void atualizar(DadosAtualizacaoFicha dados) {
+        if (dados.nomeFicha() != null){
+            this.nomeFicha = dados.nomeFicha();
+        }
+    }
 }
