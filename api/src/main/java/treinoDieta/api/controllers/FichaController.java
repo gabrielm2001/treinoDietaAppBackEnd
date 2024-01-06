@@ -1,5 +1,6 @@
 package treinoDieta.api.controllers;
 
+import jakarta.persistence.Table;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,12 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import treinoDieta.api.nonPhysicalEntities.ficha.DadosCadastroFicha;
-import treinoDieta.api.nonPhysicalEntities.ficha.DadosDetalhamentoFicha;
-import treinoDieta.api.nonPhysicalEntities.ficha.Ficha;
-import treinoDieta.api.nonPhysicalEntities.ficha.FichaRepository;
+import treinoDieta.api.nonPhysicalEntities.ficha.*;
 import treinoDieta.api.physicalEntities.aluno.Aluno;
 import treinoDieta.api.physicalEntities.aluno.AlunoRepository;
+import treinoDieta.api.physicalEntities.aluno.DadosAtualizacaoAluno;
 import treinoDieta.api.physicalEntities.professor.DadosDetalhamentoProfessor;
 
 @RestController
@@ -47,6 +46,15 @@ public class FichaController {
     @GetMapping("{id}")
     public ResponseEntity ficha(@PathVariable Long id){
         var ficha = fichaRepository.getReferenceById(id);
+        return ResponseEntity.ok().body(new DadosDetalhamentoFicha(ficha));
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity editar(@PathVariable Long id, @RequestBody DadosAtualizacaoFicha dados){
+        var ficha = fichaRepository.getReferenceById(id);
+        ficha.atualizar(dados);
+
         return ResponseEntity.ok().body(new DadosDetalhamentoFicha(ficha));
     }
 
