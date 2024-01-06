@@ -2,6 +2,9 @@ package treinoDieta.api.controllers;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -33,4 +36,12 @@ public class FichaController {
 
         return  ResponseEntity.created(uri).body(new DadosDetalhamentoFicha(ficha));
     }
+
+    @GetMapping
+    public ResponseEntity<Page<DadosDetalhamentoFicha>> todasFichas(@PageableDefault(size = 10) Pageable paginacao){
+        var page = fichaRepository.findAll(paginacao).map(DadosDetalhamentoFicha::new);
+
+        return ResponseEntity.ok().body(page);
+    }
+
 }
