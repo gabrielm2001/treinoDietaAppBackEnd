@@ -22,11 +22,11 @@ public class Ficha {
     @JoinColumn(name = "aluno_id")
     private Aluno aluno;
 
-    private String nome_ficha;
+    private String nomeFicha;
 
 
     public Ficha(DadosCadastroFicha dados, Aluno aluno){
-        this.nome_ficha = dados.nome_ficha();
+        this.nomeFicha = dados.nomeFicha();
         this.aluno = aluno;
     }
 }
