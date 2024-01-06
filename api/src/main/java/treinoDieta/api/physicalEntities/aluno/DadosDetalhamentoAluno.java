@@ -12,10 +12,10 @@ public record DadosDetalhamentoAluno(
         @NotBlank String projeto,
         @NotNull Objetivo objetivo,
         @NotBlank String agua,
-        @NotBlank String tbm
-
+        @NotBlank String tbm,
+        @NotBlank Long id
 ) {
     public DadosDetalhamentoAluno(Aluno aluno) {
-        this(aluno.getNome(),aluno.getEmail(), aluno.getIdade(), aluno.getAltura(), aluno.getPeso(), aluno.getProjeto(), aluno.getObjetivo(), aluno.getAgua(), aluno.getTbm());
+        this(aluno.getNome(),aluno.getEmail(), aluno.getIdade(), aluno.getAltura(), aluno.getPeso(), aluno.getProjeto(), aluno.getObjetivo(), aluno.getAgua(), aluno.getTbm(), aluno.getId());
     }
 }
