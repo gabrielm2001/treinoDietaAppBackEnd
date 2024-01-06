@@ -44,4 +44,10 @@ public class FichaController {
         return ResponseEntity.ok().body(page);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity ficha(@PathVariable Long id){
+        var ficha = fichaRepository.getReferenceById(id);
+        return ResponseEntity.ok().body(new DadosDetalhamentoFicha(ficha));
+    }
+
 }
