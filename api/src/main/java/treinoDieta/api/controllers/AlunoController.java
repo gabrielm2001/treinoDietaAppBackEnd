@@ -9,8 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import treinoDieta.api.nonPhysicalEntities.ficha.DadosCadastroFicha;
+import treinoDieta.api.nonPhysicalEntities.ficha.DadosDetalhamentoFicha;
+import treinoDieta.api.nonPhysicalEntities.ficha.FichaRepository;
 import treinoDieta.api.physicalEntities.aluno.*;
 import treinoDieta.api.physicalEntities.professor.ProfessorRepository;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/aluno")
@@ -20,6 +25,9 @@ public class AlunoController {
 
     @Autowired
     private ProfessorRepository professorRepository;
+
+    @Autowired
+    private FichaRepository fichaRepository;
 
     @PostMapping("/{id}")
     @Transactional
@@ -62,6 +70,13 @@ public class AlunoController {
         aluno.deletar();
 
         return ResponseEntity.status(200).body(new DadosDetalhamentoAluno(aluno));
+    }
+
+    @GetMapping("/fichas/{id}")
+    public ResponseEntity<Page<DadosDetalhamentoFicha>> listarFichas(@PathVariable Long id, @PageableDefault(size = 10) Pageable paginacao){
+        var page = fichaRepository.findAllByAluno_id(paginacao, id).map(DadosDetalhamentoFicha::new);
+
+        return ResponseEntity.ok().body(page);
     }
 
 }
