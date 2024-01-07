@@ -34,4 +34,10 @@ public class TreinoController {
 
         return ResponseEntity.created(uri).body(new DadosDetalhamentoTreino(treino));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity listar(@PathVariable Long id){
+        var treino = treinoRepository.getReferenceById(id);
+        return ResponseEntity.ok().body(new DadosDetalhamentoTreino(treino));
+    }
 }
