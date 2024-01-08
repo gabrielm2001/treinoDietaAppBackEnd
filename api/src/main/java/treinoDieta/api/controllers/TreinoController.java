@@ -61,4 +61,13 @@ public class TreinoController {
         return ResponseEntity.ok().body(new DadosDetalhamentoTreino(treino));
     }
 
+    @DeleteMapping("{id}")
+    @Transactional
+    public ResponseEntity deletar(@PathVariable Long id){
+        var treino = treinoRepository.getReferenceById(id);
+        treino.remover();
+
+        return  ResponseEntity.noContent().build();
+    }
+
 }
