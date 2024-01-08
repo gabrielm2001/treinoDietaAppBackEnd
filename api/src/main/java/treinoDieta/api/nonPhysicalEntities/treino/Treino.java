@@ -38,4 +38,8 @@ public class Treino {
             this.nomeTreino = dados.nomeTreino();
         }
     }
+
+    public void remover() {
+        this.ativo = false;
+    }
 }
