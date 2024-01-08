@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import treinoDieta.api.nonPhysicalEntities.ficha.*;
+import treinoDieta.api.nonPhysicalEntities.treino.DadosDetalhamentoTreino;
 import treinoDieta.api.physicalEntities.aluno.Aluno;
 import treinoDieta.api.physicalEntities.aluno.AlunoRepository;
 import treinoDieta.api.physicalEntities.aluno.DadosAtualizacaoAluno;
@@ -25,6 +26,8 @@ public class FichaController {
 
     @Autowired
     private AlunoRepository alunoRepository;
+    @Autowired
+    private TreinoRepository treinoRepository;
 
     @PostMapping("/{id}")
     @Transactional
@@ -65,6 +68,13 @@ public class FichaController {
         ficha.deletar();
 
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/treinos/{id}")
+    public ResponseEntity<Page<DadosDetalhamentoTreino>> listarTodosExercicios(@PathVariable Long id, @PageableDefault(size = 10) Pageable paginacao){
+        var page = treinoRepository.findAllByAtivoTrueAndFichaId(paginacao, id).map(DadosDetalhamentoTreino:: new);
+
+        return ResponseEntity.ok().body(page);
     }
 
 }
