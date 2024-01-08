@@ -7,4 +7,6 @@ import treinoDieta.api.nonPhysicalEntities.treino.Treino;
 
 public interface TreinoRepository extends JpaRepository<Treino, Long> {
     Page<Treino> findAllByAtivoTrue(Pageable pageable);
+
+    Page<Treino> findAllByAtivoTrueAndFichaId(Pageable paginacao, Long id);
 }
