@@ -31,4 +31,11 @@ public class Treino {
         this.nomeTreino = dados.nomeTreino();
         this.ficha = ficha;
     }
+
+    public void update(DadosAtualizacaotreino dados) {
+        if (dados.nomeTreino() != null){
+            System.out.println(dados.nomeTreino());
+            this.nomeTreino = dados.nomeTreino();
+        }
+    }
 }
