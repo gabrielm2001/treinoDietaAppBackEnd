@@ -12,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import treinoDieta.api.nonPhysicalEntities.ficha.DadosDetalhamentoFicha;
 import treinoDieta.api.nonPhysicalEntities.ficha.FichaRepository;
 import treinoDieta.api.nonPhysicalEntities.ficha.TreinoRepository;
+import treinoDieta.api.nonPhysicalEntities.treino.DadosAtualizacaotreino;
 import treinoDieta.api.nonPhysicalEntities.treino.DadosCadastroTreino;
 import treinoDieta.api.nonPhysicalEntities.treino.DadosDetalhamentoTreino;
 import treinoDieta.api.nonPhysicalEntities.treino.Treino;
@@ -50,4 +51,14 @@ public class TreinoController {
 
         return ResponseEntity.ok().body(page);
     }
+
+    @PutMapping("{id}")
+    @Transactional
+    public ResponseEntity editar(@PathVariable Long id, @RequestBody @Valid DadosAtualizacaotreino nomeTreino){
+        var treino = treinoRepository.getReferenceById(id);
+        treino.update(nomeTreino);
+
+        return ResponseEntity.ok().body(new DadosDetalhamentoTreino(treino));
+    }
+
 }
