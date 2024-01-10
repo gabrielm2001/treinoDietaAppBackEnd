@@ -39,4 +39,18 @@ public class Exercicio {
         this.treino = treino;
         this.ativo = true;
     }
+
+    public void atualizar(DadosAtualizacaoExercicio dados) {
+        if (dados.nomeExercicio() != null){
+            this.nomeExercicio = dados.nomeExercicio();
+        }else if (dados.detalhes() != null){
+            this.detalhes = dados.detalhes();
+        }else if (dados.tecnica() != null){
+            this.tecnica = dados.tecnica();
+        }else if (dados.repeticoes() != null){
+            this.repeticoes = dados.repeticoes();
+        }else if (dados.series() != null){
+            this.series = dados.series();
+        }
+    }
 }
