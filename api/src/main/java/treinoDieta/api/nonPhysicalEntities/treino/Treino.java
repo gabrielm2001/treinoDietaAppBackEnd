@@ -20,6 +20,8 @@ public class Treino {
 
     private String nomeTreino;
 
+    private String tempoTreino;
+
     @ManyToOne
     @JoinColumn(name = "ficha_id")
     private Ficha ficha;
@@ -30,6 +32,7 @@ public class Treino {
         this.ativo = true;
         this.nomeTreino = dados.nomeTreino();
         this.ficha = ficha;
+        this.tempoTreino = dados.tempoTreino();
     }
 
     public void update(DadosAtualizacaotreino dados) {
