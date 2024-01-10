@@ -1,6 +1,8 @@
 package treinoDieta.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -29,5 +31,13 @@ public class ExercicioController {
         var uri = uriBuilder.path("/exercicio/{id}").buildAndExpand(exercicio.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new DadosDetalhamentoExercicio(exercicio));
+    }
+
+    @GetMapping("treino/{id}")
+    public ResponseEntity<Page<DadosDetalhamentoExercicio>> listagemExerciciosTreino(@PathVariable Long id, Pageable paginacao){
+        var treino = treinoRepository.getReferenceById(id);
+        var page = exercicioRepository.findAllByAtivoTrueAndTreinoId(paginacao, id).map(DadosDetalhamentoExercicio::new);
+
+        return ResponseEntity.ok().body(page);
     }
 }
