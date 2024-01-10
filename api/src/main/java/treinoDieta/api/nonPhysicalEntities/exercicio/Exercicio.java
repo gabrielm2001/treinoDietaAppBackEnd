@@ -53,4 +53,8 @@ public class Exercicio {
             this.series = dados.series();
         }
     }
+
+    public void deletar() {
+        this.ativo = false;
+    }
 }
