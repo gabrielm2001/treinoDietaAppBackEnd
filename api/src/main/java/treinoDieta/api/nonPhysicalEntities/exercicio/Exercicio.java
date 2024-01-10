@@ -37,5 +37,6 @@ public class Exercicio {
         this.detalhes = dados.detalhes();
         this.nomeExercicio = dados.nomeExercicio();
         this.treino = treino;
+        this.ativo = true;
     }
 }
