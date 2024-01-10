@@ -46,4 +46,12 @@ public class ExercicioController {
         exercicio.atualizar(dados);
         return ResponseEntity.ok().body(new DadosDetalhamentoExercicio(exercicio));
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deletar(@PathVariable Long id){
+        var exercicio = exercicioRepository.getReferenceById(id);
+        exercicio.deletar();
+        return ResponseEntity.noContent().build();
+    }
 }
