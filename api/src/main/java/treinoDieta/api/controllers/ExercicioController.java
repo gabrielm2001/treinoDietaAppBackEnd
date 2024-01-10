@@ -1,5 +1,6 @@
 package treinoDieta.api.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -7,10 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import treinoDieta.api.nonPhysicalEntities.exercicio.DadosCadastroExercicio;
-import treinoDieta.api.nonPhysicalEntities.exercicio.DadosDetalhamentoExercicio;
-import treinoDieta.api.nonPhysicalEntities.exercicio.Exercicio;
-import treinoDieta.api.nonPhysicalEntities.exercicio.ExercicioRepository;
+import treinoDieta.api.nonPhysicalEntities.exercicio.*;
 import treinoDieta.api.nonPhysicalEntities.ficha.TreinoRepository;
 
 @RestController
@@ -39,5 +37,13 @@ public class ExercicioController {
         var page = exercicioRepository.findAllByAtivoTrueAndTreinoId(paginacao, id).map(DadosDetalhamentoExercicio::new);
 
         return ResponseEntity.ok().body(page);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity atualizar(@PathVariable Long id, @RequestBody DadosAtualizacaoExercicio dados){
+        var exercicio = exercicioRepository.getReferenceById(id);
+        exercicio.atualizar(dados);
+        return ResponseEntity.ok().body(new DadosDetalhamentoExercicio(exercicio));
     }
 }
