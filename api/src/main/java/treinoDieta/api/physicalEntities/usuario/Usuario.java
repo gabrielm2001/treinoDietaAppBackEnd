@@ -1,4 +1,4 @@
-package treinoDieta.api.physicalEntities;
+package treinoDieta.api.physicalEntities.usuario;
 
 
 import jakarta.persistence.*;
@@ -24,7 +24,7 @@ public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     private String login;
     private String senha;
@@ -41,9 +41,7 @@ public class Usuario implements UserDetails {
             return List.of(new SimpleGrantedAuthority("ROLE_PROFESSOR"));
         }
 
-        if (role == UsuarioRole.ROLE_ALUNO){
-            return List.of(new SimpleGrantedAuthority("ROLE_ALUNO"));
-        }
+        return List.of(new SimpleGrantedAuthority("ROLE_ALUNO"));
     }
 
     @Override
