@@ -31,6 +31,12 @@ public class Usuario implements UserDetails {
 
     private UsuarioRole role;
 
+    public Usuario(DadosResgistroUsuario dados, String senhaCriptografada) {
+        this.role = dados.role();
+        this.login = dados.login();
+        this.senha = dados.senha();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (role == UsuarioRole.ROLE_ADMIN){
