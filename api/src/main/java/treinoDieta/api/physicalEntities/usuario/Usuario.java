@@ -29,12 +29,13 @@ public class Usuario implements UserDetails {
     private String login;
     private String senha;
 
+    @Enumerated(EnumType.STRING)
     private UsuarioRole role;
 
     public Usuario(DadosResgistroUsuario dados, String senhaCriptografada) {
         this.role = dados.role();
         this.login = dados.login();
-        this.senha = dados.senha();
+        this.senha = senhaCriptografada;
     }
 
     @Override

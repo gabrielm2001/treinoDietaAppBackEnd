@@ -1,4 +1,5 @@
 package treinoDieta.api.infra.security;
 
-public record DadosTokenJwt() {
+public record DadosTokenJwt(String token) {
+
 }

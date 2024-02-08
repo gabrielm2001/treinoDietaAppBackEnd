@@ -33,10 +33,12 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
                     .withIssuer("dietaTreino_api")
-                    .build().verify(token).getSubject();
+                    .build()
+                    .verify(token)
+                    .getSubject();
 
         } catch (JWTVerificationException exception){
-            return null;
+            throw new RuntimeException("Token inválido ou expirado");
         }
 
     }
