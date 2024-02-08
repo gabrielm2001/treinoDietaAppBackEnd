@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,7 @@ public class AutenticacaoController {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
     public ResponseEntity login(DadosLoginUsuario dados){
@@ -35,7 +36,7 @@ public class AutenticacaoController {
 
         var usuario = usuarioRepository.findByLogin(dados.login());
 
-        var senhasCoincidem = bCryptPasswordEncoder.matches(dados.senha(), usuario.getPassword());
+        var senhasCoincidem = passwordEncoder.matches(dados.senha(), usuario.getPassword());
 
         if (!senhasCoincidem){
             throw new RuntimeException("Senhas não coencidem");
