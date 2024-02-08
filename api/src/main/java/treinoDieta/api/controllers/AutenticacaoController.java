@@ -46,5 +46,18 @@ public class AutenticacaoController {
         return ResponseEntity.ok().body(tokenJwt);
     }
 
+    @PostMapping("/register")
+    @Transactional
+    public ResponseEntity registrar(DadosResgistroUsuario dados){
+        if (usuarioRepository.findByLogin(dados.login()) != null){
+            throw new RuntimeException("Usuario já existe");
+        }
+
+        var senhaCriptografada = new BCryptPasswordEncoder().encode(dados.senha());
+        var usuario = new Usuario(dados, senhaCriptografada);
+
+        return ResponseEntity.ok().build();
+    }
+
 
 }
