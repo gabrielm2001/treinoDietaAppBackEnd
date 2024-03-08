@@ -8,15 +8,17 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.stereotype.Service;
+import treinoDieta.api.physicalEntities.usuario.Usuario;
 
 @Service
 public class TokenService {
 
-    public String gerarToken(){
+    public String gerarToken(Usuario usuario){
         try {
             Algorithm algorithm = Algorithm.HMAC256("1234");
             String token = JWT.create()
-                    .withIssuer("auth0")
+                    .withIssuer(usuario.getUsername())
+                    .withClaim("roles", usuario.getAuthorities().toString())
                     .sign(algorithm);
             return token;
         } catch (JWTCreationException exception){
