@@ -1,4 +1,4 @@
-package treinoDieta.api.security.token;
+package treinoDieta.api.infra.security.token;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

@@ -4,9 +4,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +15,8 @@ import treinoDieta.api.physicalEntities.usuario.DadosLoginUsuario;
 import treinoDieta.api.physicalEntities.usuario.DadosResgistroUsuario;
 import treinoDieta.api.physicalEntities.usuario.Usuario;
 import treinoDieta.api.physicalEntities.usuario.UsuarioRepository;
-import treinoDieta.api.security.token.DadosToken;
-import treinoDieta.api.security.token.TokenService;
+import treinoDieta.api.infra.security.token.DadosToken;
+import treinoDieta.api.infra.security.token.TokenService;
 
 @RequestMapping("/auth")
 @RestController
