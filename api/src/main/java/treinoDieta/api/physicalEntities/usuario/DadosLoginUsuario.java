@@ -1,7 +1,11 @@
 package treinoDieta.api.physicalEntities.usuario;
 
+import jakarta.validation.constraints.NotNull;
+
 public record DadosLoginUsuario(
-        String login,
-        String senha
+        @NotNull
+        String username,
+        @NotNull
+        String password
 ) {
 }

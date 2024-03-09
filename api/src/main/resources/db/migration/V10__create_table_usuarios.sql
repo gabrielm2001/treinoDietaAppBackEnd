@@ -1,9 +1,10 @@
-create table usuarios(
+CREATE TABLE usuarios(
+   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+   user_role VARCHAR(100) NOT NULL,
+   username VARCHAR(100) NOT NULL,
+   password VARCHAR(100) NOT NULL,
 
-    id bigint not null auto_increment,
-    login varchar(100) not null,
-    senha varchar(255) not null,
-    role varchar(244) not null,
+   PRIMARY KEY(id)
 
-    primary key(id)
 );
+
