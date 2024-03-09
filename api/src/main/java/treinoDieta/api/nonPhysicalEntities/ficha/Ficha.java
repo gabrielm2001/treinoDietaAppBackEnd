@@ -24,15 +24,22 @@ public class Ficha {
 
     private String nomeFicha;
 
+    private Boolean ativo;
+
 
     public Ficha(DadosCadastroFicha dados, Aluno aluno){
         this.nomeFicha = dados.nomeFicha();
         this.aluno = aluno;
+        this.ativo = true;
     }
 
     public void atualizar(DadosAtualizacaoFicha dados) {
         if (dados.nomeFicha() != null){
             this.nomeFicha = dados.nomeFicha();
         }
+    }
+
+    public void deletar() {
+        this.ativo = false;
     }
 }
