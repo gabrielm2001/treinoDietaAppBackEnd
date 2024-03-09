@@ -17,8 +17,10 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256("1234");
             String token = JWT.create()
-                    .withIssuer(usuario.getUsername())
-                    .withClaim("roles", usuario.getAuthorities().toString())
+                    .withIssuer("auth0")
+                    .withSubject(usuario.getUsername())
+                    .withClaim("id", usuario.getId())
+                    .withClaim("authority", usuario.getAuthorities().stream().toString())
                     .sign(algorithm);
             return token;
         } catch (JWTCreationException exception){
@@ -31,15 +33,12 @@ public class TokenService {
     public String getSubject(String token){
         DecodedJWT decodedJWT;
         try {
-            Algorithm algorithm = Algorithm.HMAC256("123");
-            JWTVerifier verifier = JWT.require(algorithm)
+            Algorithm algorithm = Algorithm.HMAC256("1234");
+            return JWT.require(algorithm)
                     // specify any specific claim validations
                     .withIssuer("auth0")
-                    .build();
-
-            decodedJWT = verifier.verify(token);
-
-            return decodedJWT.getSubject();
+                    .build().verify(token)
+                    .getSubject();
         } catch (JWTVerificationException exception){
 
         }

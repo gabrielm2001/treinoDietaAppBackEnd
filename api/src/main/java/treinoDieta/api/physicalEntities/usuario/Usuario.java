@@ -22,6 +22,7 @@ public class Usuario implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     private UserRole userRole;
     private String password;
     private String username;
@@ -34,8 +35,8 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (UserRole.ROLE_ADMIM == userRole){
-            return List.of(new SimpleGrantedAuthority("ROLE_ADMIM"), new SimpleGrantedAuthority("ROLE_PROFESSOR"), new SimpleGrantedAuthority("ROLE_ALUNO"));
+        if (UserRole.ROLE_ADMIN == userRole){
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_PROFESSOR"), new SimpleGrantedAuthority("ROLE_ALUNO"));
         }else if (UserRole.ROLE_ALUNO == userRole){
             return List.of(new SimpleGrantedAuthority("ROLE_ALUNO"));
         }else if (UserRole.ROLE_PROFESSOR == userRole){

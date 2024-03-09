@@ -5,5 +5,6 @@ CREATE TABLE usuarios(
    password VARCHAR(100) NOT NULL,
 
    PRIMARY KEY(id)
+
 );
 
