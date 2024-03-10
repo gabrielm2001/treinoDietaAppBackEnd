@@ -9,7 +9,7 @@ CREATE TABLE alunos(
   objetivo varchar(20) NOT NULL,
   agua varchar(20),
   tbm varchar(20),
-  professor_id bigint unsigned NOT NULL,
+  professor_id bigint unsigned,
 
   PRIMARY KEY(id),
   FOREIGN KEY(professor_id) REFERENCES professores(id)

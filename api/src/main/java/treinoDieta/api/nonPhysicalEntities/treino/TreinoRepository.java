@@ -1,4 +1,4 @@
-package treinoDieta.api.nonPhysicalEntities.ficha;
+package treinoDieta.api.nonPhysicalEntities.treino;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

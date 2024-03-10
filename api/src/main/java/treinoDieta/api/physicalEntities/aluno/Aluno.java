@@ -1,9 +1,6 @@
 package treinoDieta.api.physicalEntities.aluno;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import treinoDieta.api.physicalEntities.professor.Professor;
 
 @Table(name ="alunos")
@@ -12,6 +9,7 @@ import treinoDieta.api.physicalEntities.professor.Professor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Data
 public class Aluno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,7 +44,6 @@ public class Aluno {
         this.peso = dados.peso();
         this.projeto = dados.projeto();
         this.objetivo = dados.objetivo();
-        System.out.println(dados.genero());
         this.genero = dados.genero();
         this.ativo = true;
 
@@ -54,6 +51,24 @@ public class Aluno {
         this.tbm = calculaTbm(dados.genero(), dados.peso(), dados.idade(), dados.altura());
         this.professor = professor;
     }
+
+    public Aluno(DadosCadastroAluno dados) {
+        this.nome = dados.nome();
+        this.idade = dados.idade();
+        this.altura = dados.altura();
+        this.email = dados.email();
+        this.peso = dados.peso();
+        this.projeto = dados.projeto();
+        this.objetivo = dados.objetivo();
+        this.genero = dados.genero();
+        this.ativo = true;
+
+
+        this.agua = String.valueOf(Double.parseDouble(dados.peso()) * 35);
+        this.tbm = calculaTbm(dados.genero(), dados.peso(), dados.idade(), dados.altura());
+        this.professor = null;
+    }
+
 
     private String calculaTbm(Genero genero, String peso, String idade, String altura) {
         if (genero == Genero.MASCULINO || genero == Genero.NENHUM) {

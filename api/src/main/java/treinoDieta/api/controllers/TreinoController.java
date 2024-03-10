@@ -1,5 +1,8 @@
 package treinoDieta.api.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,9 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import treinoDieta.api.nonPhysicalEntities.ficha.DadosDetalhamentoFicha;
 import treinoDieta.api.nonPhysicalEntities.ficha.FichaRepository;
-import treinoDieta.api.nonPhysicalEntities.ficha.TreinoRepository;
+import treinoDieta.api.nonPhysicalEntities.treino.TreinoRepository;
 import treinoDieta.api.nonPhysicalEntities.treino.DadosAtualizacaotreino;
 import treinoDieta.api.nonPhysicalEntities.treino.DadosCadastroTreino;
 import treinoDieta.api.nonPhysicalEntities.treino.DadosDetalhamentoTreino;
@@ -19,6 +21,8 @@ import treinoDieta.api.nonPhysicalEntities.treino.Treino;
 
 @RestController
 @RequestMapping("/treino")
+@Tag(name = "Treino", description = "Controlador do Treino")
+@SecurityRequirement(name = "bearer-key")
 public class TreinoController {
     @Autowired
     private TreinoRepository treinoRepository;
@@ -28,6 +32,7 @@ public class TreinoController {
 
     @PostMapping("/{id}")
     @Transactional
+    @Operation(summary = "Regista um Treino", description = "Regista um Treino")
     public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroTreino dados, @PathVariable Long id, UriComponentsBuilder uriBuilder){
         var ficha = fichaRepository.getReferenceById(id);
         var treino = new Treino(dados, ficha);
@@ -40,12 +45,14 @@ public class TreinoController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Retorna um treino", description = "Retorna um treino")
     public ResponseEntity listar(@PathVariable Long id){
         var treino = treinoRepository.getReferenceById(id);
         return ResponseEntity.ok().body(new DadosDetalhamentoTreino(treino));
     }
 
     @GetMapping
+    @Operation(summary = "Paginação de todos os treinos", description = "Paginação de todos os treinos")
     public ResponseEntity<Page<DadosDetalhamentoTreino>> listarTodos(@PageableDefault(size = 10) Pageable paginacao){
         var page = treinoRepository.findAllByAtivoTrue(paginacao).map(DadosDetalhamentoTreino:: new);
 
@@ -54,6 +61,7 @@ public class TreinoController {
 
     @PutMapping("{id}")
     @Transactional
+    @Operation(summary = "Atualização de um treino", description = "Atualização de um treino")
     public ResponseEntity editar(@PathVariable Long id, @RequestBody @Valid DadosAtualizacaotreino nomeTreino){
         var treino = treinoRepository.getReferenceById(id);
         treino.update(nomeTreino);
@@ -62,7 +70,7 @@ public class TreinoController {
     }
 
     @DeleteMapping("{id}")
-    @Transactional
+    @Transactional@Operation(summary = "Remove um treino", description = "Remove um treino")
     public ResponseEntity deletar(@PathVariable Long id){
         var treino = treinoRepository.getReferenceById(id);
         treino.remover();

@@ -1,5 +1,7 @@
 package treinoDieta.api.controllers;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import treinoDieta.api.infra.security.token.TokenService;
 
 @RequestMapping("/auth")
 @RestController
+@Tag(name = "Autenticação", description = "Controlador do Treino")
 public class AutenticacaoController {
 
     @Autowired

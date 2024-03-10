@@ -1,5 +1,9 @@
 package treinoDieta.api.controllers;
 
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +23,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/aluno")
+@Tag(name = "Aluno", description = "Controlador do Aluno")
+@SecurityRequirement(name = "bearer-key")
 public class AlunoController {
     @Autowired
     private AlunoRepository alunoRepository;
@@ -31,6 +37,7 @@ public class AlunoController {
 
     @PostMapping("/{id}")
     @Transactional
+    @Operation(summary = "Obtém dados de exemplo", description = "Registrar um aluno")
     public ResponseEntity registrar(@RequestBody @Valid DadosCadastroAluno dados, UriComponentsBuilder uriBuilder, @PathVariable Long id){
         var professor = professorRepository.getReferenceById(id);
         var aluno = new Aluno(dados, professor);
@@ -42,6 +49,7 @@ public class AlunoController {
     }
 
     @GetMapping
+    @Operation(summary = "Obtém dados de exemplo", description = "Paginação que retorna todos os alunos")
     public ResponseEntity<Page<DadosDetalhamentoAluno>> listarTodos(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao){
         var alunos = alunoRepository.findAllByAtivoTrue(paginacao);
         var page = alunos.map(DadosDetalhamentoAluno::new);
@@ -50,6 +58,7 @@ public class AlunoController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Obtém dados de exemplo", description = "Retorna um aluno de acordo com o id")
     public ResponseEntity listar(@PathVariable Long id){
         var aluno = alunoRepository.getReferenceById(id);
         return ResponseEntity.status(200).body(new DadosDetalhamentoAluno(aluno));
@@ -57,6 +66,7 @@ public class AlunoController {
 
     @PutMapping("{id}")
     @Transactional
+    @Operation(summary = "Obtém dados de exemplo", description = "Atualiza um aluno de acordo com o id")
     public ResponseEntity editar(@RequestBody DadosAtualizacaoAluno dados , @PathVariable Long id){
         var aluno = alunoRepository.getReferenceById(id);
         aluno.atualizar(dados);
@@ -65,6 +75,7 @@ public class AlunoController {
 
     @DeleteMapping("/{id}")
     @Transactional
+    @Operation(summary = "Obtém dados de exemplo", description = "Remove um aluno de acordo com o id")
     public ResponseEntity deletar(@PathVariable Long id){
         var aluno = alunoRepository.getReferenceById(id);
         aluno.deletar();
@@ -73,6 +84,7 @@ public class AlunoController {
     }
 
     @GetMapping("/fichas/{id}")
+    @Operation(summary = "Obtém dados de exemplo", description = "Retorna todas as fichas de um aluno de acordo com o id")
     public ResponseEntity<Page<DadosDetalhamentoFicha>> listarFichas(@PathVariable Long id, @PageableDefault(size = 10) Pageable paginacao){
         var page = fichaRepository.findAllByAluno_id(paginacao, id).map(DadosDetalhamentoFicha::new);
 
