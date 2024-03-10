@@ -34,7 +34,7 @@ public class ProfessorController {
         var professor = professorRepository.save(new Professor(dados));
         var uri = uriBuilder.path("/professor/{id}").buildAndExpand(professor.getId()).toUri();
 
-        return ResponseEntity.created(uri).body(professor);
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoProfessor(professor));
     }
 
     @GetMapping

@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
@@ -20,29 +22,27 @@ public class TratadorDeErros {
         return ResponseEntity.notFound().build();
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Object> tratarErro400(MethodArgumentNotValidException ex){
-        var errors = ex.getFieldErrors();
-
-        return ResponseEntity.badRequest().body(errors.stream().map(DadosErroValidacao::new).toList());
-    }
 
     @ExceptionHandler(HttpServerErrorException.InternalServerError.class)
     public ResponseEntity<Object> tratarErro500(HttpServerErrorException.InternalServerError ex){
         return ResponseEntity.status(500).body(ex.getMessage());
     }
 
-    @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<Object> tratarErro403(AccessDeniedException ex){
-        var errors = ex.getMessage();
-
-        return ResponseEntity.badRequest().body(errors);
-    }
-
     @ExceptionHandler(ValidacaoException.class)
     public ResponseEntity<Object> tratarErroValidacao(ValidacaoException ex){
         return ResponseEntity.badRequest().body(ex.getMessage());
 
+    }
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseBody
+    public ResponseEntity<String> handleAccessDeniedException(AccessDeniedException ex) {
+        return new ResponseEntity<>("Acesso negado", HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseBody
+    public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        return new ResponseEntity<>("Erro de validação", HttpStatus.BAD_REQUEST);
     }
 
     private record DadosErroValidacao(String campo, String message){
